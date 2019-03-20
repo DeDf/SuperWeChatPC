@@ -2,7 +2,7 @@
 
 fork from https://github.com/anhkgg/SuperWeChatPC
 
-微信：
+微信PC版：
 多开
 防撤回
 。。。
