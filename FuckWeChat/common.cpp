@@ -18,7 +18,7 @@ BYTE *GetFileVersion(PWCHAR pwchFilePath, VS_FIXEDFILEINFO **ppVerInfo)
         DWORD dwSize = GetFileVersionInfoSizeW(pwchFilePath, &dwTemp);
         if (dwSize)
         {
-            BYTE *pData = (BYTE *)malloc(dwSize + 1);
+            pData = (BYTE *)malloc(dwSize + 1);
             if (pData)
             {
                 if (GetFileVersionInfoW(pwchFilePath, 0, dwSize, pData))
@@ -44,7 +44,7 @@ BYTE *GetFileVersion(PWCHAR pwchFilePath, VS_FIXEDFILEINFO **ppVerInfo)
     return pData;
 }
 
-bool
+BOOL
 IsSupportedWxVersion (
     P_WX_VERSION pWXVer,
     INT ver_count,
@@ -55,6 +55,7 @@ IsSupportedWxVersion (
     WORD* fake_code_count
     )
 {
+    BOOL bRet = FALSE;
     WCHAR pwchDllPath[MAX_PATH];
 
     GetModuleFileNameW(NULL, pwchDllPath, _countof(pwchDllPath));
@@ -97,6 +98,7 @@ IsSupportedWxVersion (
                     *fake_code_count = pWXVer[i].PatchCodeLen;
                 }
                 
+                bRet = TRUE;
                 break;
             }
         }
@@ -104,7 +106,7 @@ IsSupportedWxVersion (
         free(pData);
     }
 
-    return false;
+    return bRet;
 }
 
 void Patch(PVOID addr, DWORD size, PVOID code)

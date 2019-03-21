@@ -19,7 +19,7 @@ typedef struct _WX_VERSION {
     UCHAR PatchCode[3];
 } WX_VERSION, *P_WX_VERSION;
 
-bool
+BOOL
 IsSupportedWxVersion (
                       P_WX_VERSION pWXVer,
                       INT ver_count,
